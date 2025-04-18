@@ -1,0 +1,37 @@
+---
+/**
+ * MaterialIcon component
+ * 
+ * Usage:
+ * <MaterialIcon icon="home" />
+ * <MaterialIcon icon="auto_fix_high" class="text-2xl" />
+ */
+
+interface Props {
+  icon: string;
+  class?: string;
+  label?: string;
+  isDecorative?: boolean;
+}
+
+const { 
+  icon, 
+  class: className = "",
+  label,
+  isDecorative = false
+} = Astro.props;
+---
+
+<span 
+  class={`material-symbols-outlined ${className}`}
+  aria-hidden={isDecorative ? "true" : undefined}
+  aria-label={!isDecorative && !label ? undefined : label}
+  role={!isDecorative && !label ? "img" : undefined}
+>
+  {icon}
+</span>
+
+<style>
+  /* Ensure material icons are loaded */
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+</style>

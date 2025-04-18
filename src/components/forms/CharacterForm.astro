@@ -1,0 +1,119 @@
+---
+import MaterialIcon from "../icons/MaterialIcon.astro";
+---
+
+<div class="bg-white p-4 sm:p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+  <h1
+    class="text-2xl sm:text-3xl font-bold mb-4 text-red-700 flex items-center gap-2"
+  >
+    <MaterialIcon icon="person" class="text-2xl sm:text-3xl" />
+    Basic Character Information
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+    <div class="space-y-4">
+      <div class="bg-gray-50 p-4 rounded-md shadow-sm">
+        <label class="block text-sm font-medium text-gray-700"
+          >Character Name</label
+        >
+        <input
+          type="text"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+          placeholder="Enter character name"
+        />
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-md shadow-sm">
+        <label class="block text-sm font-medium text-gray-700">Species</label>
+        <select
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+        >
+          <option value="">Select species</option>
+          <option value="human">Human</option>
+          <option value="elf">Elf</option>
+          <option value="dwarf">Dwarf</option>
+          <option value="halfling">Halfling</option>
+          <option value="dragonborn">Dragonborn</option>
+          <option value="tiefling">Tiefling</option>
+          <option value="changeling">Changeling</option>
+        </select>
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-md shadow-sm">
+        <label class="block text-sm font-medium text-gray-700">Background</label
+        >
+        <select
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+        >
+          <option value="">Select background</option>
+          <option value="acolyte">Acolyte</option>
+          <option value="criminal">Criminal</option>
+          <option value="folk_hero">Folk Hero</option>
+          <option value="noble">Noble</option>
+          <option value="sage">Sage</option>
+          <option value="soldier">Soldier</option>
+          <option value="merchant">Merchant</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="bg-gray-50 p-4 rounded-md shadow-sm">
+        <label class="block text-sm font-medium text-gray-700">Class</label>
+        <select
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+        >
+          <option value="">Select class</option>
+          <option value="fighter">Fighter</option>
+          <option value="wizard">Wizard</option>
+          <option value="cleric">Cleric</option>
+          <option value="rogue">Rogue</option>
+          <option value="barbarian">Barbarian</option>
+          <option value="bard">Bard</option>
+          <option value="warlock">Warlock</option>
+          <option value="monk">Monk</option>
+          <option value="paladin">Paladin</option>
+          <option value="druid">Druid</option>
+          <option value="sorcerer">Sorcerer</option>
+        </select>
+
+        <label class="mt-4 block text-sm font-medium text-gray-700">Subclass</label>
+        <input
+          type="text"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+          placeholder="Enter subclass"
+        />
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded-md shadow-sm">
+        <label class="block text-sm font-medium text-gray-700">Level</label>
+        <input
+          type="number"
+          min="1"
+          max="20"
+          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border"
+          value="1"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 sm:mt-6 bg-gray-50 p-4 rounded-md shadow-sm">
+    <label class="block text-sm font-medium text-gray-700"
+      >Background Story</label
+    >
+    <textarea
+      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border field-sizing-content min-h-20"
+      rows="3"
+      placeholder="Character background and story..."></textarea>
+  </div>
+
+  <div class="mt-4 sm:mt-6 flex justify-end">
+    <button
+      class="bg-red-700 text-white px-4 py-2 rounded-md hover:bg-red-800 flex items-center gap-2"
+    >
+      <MaterialIcon icon="save" />
+      Save Character
+    </button>
+  </div>
+</div>

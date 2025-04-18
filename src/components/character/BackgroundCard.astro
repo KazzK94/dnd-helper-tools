@@ -1,0 +1,21 @@
+---
+interface Props {
+  backgroundText?: string;
+}
+
+const {
+  backgroundText = "A scholar from the Academy of Arcane Arts who specializes in elemental magic. After a mysterious incident that destroyed parts of the academy, Eldric has been on a quest to understand ancient magical artifacts and their powers."
+} = Astro.props;
+
+import MaterialIcon from "../icons/MaterialIcon.astro";
+---
+
+<div class="bg-gray-50 p-4 rounded-md shadow-sm">
+  <h2 class="text-lg font-semibold mb-3 text-red-700 flex items-center gap-2">
+    <MaterialIcon icon="psychology" />
+    Background
+  </h2>
+  <p class="text-gray-800">
+    {backgroundText}
+  </p>
+</div>

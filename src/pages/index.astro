@@ -1,0 +1,14 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import CharacterSheet from "../components/character/CharacterSheet.astro";
+import { loadCharacter } from "../services/characterService";
+
+// Cargar datos del personaje desde el servicio
+// En un entorno de client-side, esto podría cargar desde localStorage
+// En un entorno de server-side, usará los datos por defecto
+const characterData = loadCharacter();
+---
+
+<MainLayout title="Basic Info">
+  <CharacterSheet character={characterData} />
+</MainLayout>

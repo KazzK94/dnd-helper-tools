@@ -1,0 +1,61 @@
+---
+interface Props {
+  currentHP?: number;
+  tempHP?: number;
+  maxHP?: number;
+  armorClass?: number;
+  initiative?: number;
+  speed?: number;
+  hitDice?: string;
+}
+
+const {
+  currentHP = 38,
+  tempHP = 17,
+  maxHP = 38,
+  armorClass = 14,
+  initiative = 3,
+  speed = 30,
+  hitDice = "5d8"
+} = Astro.props;
+
+import { formatModifier } from '../../services/characterService'
+import MaterialIcon from "../icons/MaterialIcon.astro";
+---
+
+<div class="bg-gray-50 p-4 rounded-md shadow-sm">
+  <h2 class="text-lg font-semibold mb-3 text-red-700 flex items-center gap-2">
+    <MaterialIcon icon="favorite" />
+    Combat Stats
+  </h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="col-span-2 bg-white p-3 rounded border text-center">
+      <p class="text-sm font-medium text-gray-500">Hit Points</p>
+      <p class="text-xl">
+        <span>{currentHP}</span>
+        {tempHP > 0 && <span class="text-gray-400 font-semibold">(+{tempHP})</span>} / <span class="font-bold">{maxHP}</span>
+      </p>
+    </div>
+
+    <div class="bg-white p-3 rounded border text-center">
+      <p class="text-sm font-medium text-gray-500">Armor Class</p>
+      <p class="text-xl font-bold">{armorClass}</p>
+    </div>
+
+    <div class="bg-white p-3 rounded border text-center">
+      <p class="text-sm font-medium text-gray-500">Initiative</p>
+      <p class="text-xl font-bold">+{formatModifier(initiative)}</p>
+    </div>
+
+    <div class="bg-white p-3 rounded border text-center">
+      <p class="text-sm font-medium text-gray-500">Speed</p>
+      <p class="text-xl font-bold">{speed}</p>
+    </div>
+    
+    <div class="bg-white p-3 rounded border text-center">
+      <p class="text-sm font-medium text-gray-500">Hit Dice</p>
+      <p class="text-xl font-bold">{hitDice}</p>
+    </div>
+  </div>
+</div>

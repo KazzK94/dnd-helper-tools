@@ -1,0 +1,73 @@
+---
+// Import CharacterData interface from service
+import {
+  type CharacterData,
+  DEFAULT_CHARACTER,
+  getAbilityModifier,
+} from "../../services/characterService";
+
+interface Props {
+  character?: CharacterData;
+}
+
+const { character = DEFAULT_CHARACTER } = Astro.props;
+
+const initiative = getAbilityModifier(character.abilityScores.dexterity);
+
+// Import components
+import BasicDetailsCard from "./BasicDetailsCard.astro";
+import BackgroundCard from "./BackgroundCard.astro";
+import AbilityScoresSection from "./AbilityScoresSection.astro";
+import CombatStatsCard from "./CombatStatsCard.astro";
+import MaterialIcon from "../icons/MaterialIcon.astro";
+---
+
+<div class="bg-white p-4 sm:p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+  <div class="flex justify-between items-center gap-3 mb-4">
+    <h1
+      class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-2"
+    >
+      <MaterialIcon icon="person" class="text-2xl sm:text-3xl" />
+      Character Sheet
+    </h1>
+    <a
+      href="/update"
+      class="bg-red-700 text-white px-3 py-1 rounded-md hover:bg-red-800 flex items-center gap-1"
+      aria-label="Edit Character"
+    >
+      <MaterialIcon icon="edit" />
+      <span class="hidden sm:inline">Edit Character</span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+    <!-- Left Column: Character Details -->
+    <div class="space-y-4">
+      <BasicDetailsCard
+        characterName={character.characterName}
+        species={character.species}
+        background={character.background}
+        characterClass={character.characterClass}
+        subclass={character.subclass}
+        level={character.level}
+      />
+
+      <BackgroundCard backgroundText={character.backgroundText} />
+    </div>
+
+    <!-- Right Column: Stats -->
+    <div class="space-y-4">
+      <AbilityScoresSection abilityScores={character.abilityScores} />
+
+      <CombatStatsCard
+        currentHP={character.currentHP}
+        tempHP={character.tempHP}
+        maxHP={character.maxHP}
+        armorClass={character.armorClass}
+        initiative={initiative}
+        speed={character.speed}
+        hitDice={character.hitDice}
+      />
+    </div>
+  </div>
+</div>

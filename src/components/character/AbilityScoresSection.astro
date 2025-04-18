@@ -1,0 +1,60 @@
+---
+import MaterialIcon from "../icons/MaterialIcon.astro";
+import AbilityScoreCard from "./AbilityScoreCard.astro";
+
+/**
+ * AbilityScoresSection component
+ * 
+ * Displays a grid of ability scores with their modifiers
+ * 
+ * Usage:
+ * <AbilityScoresSection abilityScores={{ strength: 10, dexterity: 12, ... }} />
+ */
+
+// Define ability score data structure
+interface AbilityScoreData {
+  name: string;
+  abbr: string;
+}
+
+// Define the props interface
+interface Props {
+  abilityScores: {
+    strength: number;
+    dexterity: number;
+    constitution: number;
+    intelligence: number;
+    wisdom: number;
+    charisma: number;
+  };
+}
+
+// Mapping of ability scores with their display information
+const ABILITY_SCORE_DATA: Record<keyof Props['abilityScores'], AbilityScoreData> = {
+  strength: { name: "Strength", abbr: "STR" },
+  dexterity: { name: "Dexterity", abbr: "DEX" },
+  constitution: { name: "Constitution", abbr: "CON" },
+  intelligence: { name: "Intelligence", abbr: "INT" },
+  wisdom: { name: "Wisdom", abbr: "WIS" },
+  charisma: { name: "Charisma", abbr: "CHA" },
+};
+
+const { abilityScores } = Astro.props;
+---
+
+<div class="bg-gray-50 p-4 rounded-md shadow-sm">
+  <h2 class="text-lg font-semibold mb-3 text-red-700 flex items-center gap-2">
+    <MaterialIcon icon="fitness_center" />
+    Ability Scores
+  </h2>
+
+  <div class="grid grid-cols-3 gap-4">
+    {Object.entries(ABILITY_SCORE_DATA).map(([key, data]) => (
+      <AbilityScoreCard
+        name={data.name}
+        abbr={data.abbr}
+        score={abilityScores[key as keyof typeof abilityScores]}
+      />
+    ))}
+  </div>
+</div>

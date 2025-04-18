@@ -1,0 +1,55 @@
+---
+interface Props {
+  characterName?: string;
+  species?: string;
+  background?: string;
+  characterClass?: string;
+  subclass?: string;
+  level?: number;
+}
+
+const {
+  characterName = "Avarak Lightweaver",
+  species = "Changeling",
+  background = "Merchant",
+  characterClass = "Warlock",
+  subclass = "Fiendish Patron",
+  level = 5,
+} = Astro.props;
+
+import MaterialIcon from "../icons/MaterialIcon.astro";
+---
+
+<div class="bg-gray-50 p-4 rounded-md shadow-sm">
+  <h2 class="text-lg font-semibold mb-3 text-red-700 flex items-center gap-2">
+    <MaterialIcon icon="badge" />
+    Basic Details
+  </h2>
+
+  <div class="space-y-4">
+    <div>
+      <p class="text-sm text-gray-500">Character Name</p>
+      <p class="text-lg font-medium">{characterName}</p>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500">Class</p>
+      <p class="text-lg font-medium">{characterClass} (Lv. {level})</p>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500">Subclass</p>
+      <p class="text-lg font-medium">{subclass}</p>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500">Species</p>
+      <p class="text-lg font-medium">{species}</p>
+    </div>
+
+    <div>
+      <p class="text-sm text-gray-500">Background</p>
+      <p class="text-lg font-medium">{background}</p>
+    </div>
+  </div>
+</div>

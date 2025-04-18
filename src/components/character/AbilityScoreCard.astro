@@ -1,0 +1,30 @@
+---
+/**
+ * AbilityScoreCard component
+ * 
+ * Displays a character ability score with calculated modifier
+ * 
+ * Usage:
+ * <AbilityScoreCard name="Strength" abbr="STR" score={10} />
+ */
+import { getAbilityModifier, formatModifier } from "../../services/characterService";
+
+interface Props {
+  name: string; // Full name of the ability (e.g. "Strength")
+  abbr: string; // Abbreviated name (e.g. "STR")
+  score: number; // The ability score value (e.g. 10)
+  class?: string; // Optional additional CSS classes
+}
+
+const { name, abbr, score, class: className = "" } = Astro.props;
+
+// Utilizar las funciones del servicio para calcular y formatear el modificador
+const modifier = getAbilityModifier(score);
+const formattedModifier = formatModifier(modifier);
+---
+
+<div class={`bg-white p-3 rounded border text-center ${className}`} title={name}>
+  <p class="text-sm font-medium text-gray-500">{abbr}</p>
+  <p class="text-xl font-bold">{formattedModifier}</p>
+  <p class="text-xs">{score}</p>
+</div>
