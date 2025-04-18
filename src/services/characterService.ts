@@ -39,7 +39,7 @@ export const DEFAULT_CHARACTER: CharacterData = {
   subclass: "Fiendish Patron",
   level: 5,
   
-  backgroundText: "A scholar from the Academy of Arcane Arts who specializes in elemental magic. After a mysterious incident that destroyed parts of the academy, Eldric has been on a quest to understand ancient magical artifacts and their powers.",
+  backgroundText: "A changeling that has taken the form of a human woman, who has spent her life as a Merchant. Since the day she became The Collector, a misterious entity under the command of Asmodeus, she has been searching for the way to break the chains that bind her to the demon lord.",
   
   abilityScores: {
 	strength: 7,
