@@ -1,0 +1,18 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import AbilitiesSection from "../components/character/AbilitiesSection.astro";
+import { getProficiencyBonus, loadCharacter } from "../services/characterService";
+
+// Load character data
+const characterData = loadCharacter();
+const proficiencyBonus = getProficiencyBonus(characterData.level);
+---
+
+<MainLayout title="Abilities">
+  <AbilitiesSection 
+    abilityScores={characterData.abilityScores}
+    savingThrowProficiencies={characterData.savingThrowProficiencies}
+    skillProficiencies={characterData.skillProficiencies}
+    proficiencyBonus={proficiencyBonus}
+  />
+</MainLayout>

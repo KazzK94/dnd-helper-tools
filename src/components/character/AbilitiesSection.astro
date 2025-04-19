@@ -1,0 +1,209 @@
+---
+/**
+ * AbilitiesSection component
+ *
+ * Displays character abilities (skills) grouped by their associated ability scores
+ */
+import MaterialIcon from "../icons/MaterialIcon.astro";
+import {
+  getAbilityModifier,
+  formatModifier,
+} from "../../services/characterService";
+
+interface AbilityScores {
+  strength: number;
+  dexterity: number;
+  constitution: number;
+  intelligence: number;
+  wisdom: number;
+  charisma: number;
+}
+
+interface SavingThrowProficiencies {
+  strength: boolean;
+  dexterity: boolean;
+  constitution: boolean;
+  intelligence: boolean;
+  wisdom: boolean;
+  charisma: boolean;
+}
+
+interface SkillProficiencies {
+  athletics: boolean;
+  acrobatics: boolean;
+  sleightOfHand: boolean;
+  stealth: boolean;
+  arcana: boolean;
+  history: boolean;
+  investigation: boolean;
+  nature: boolean;
+  religion: boolean;
+  animalHandling: boolean;
+  insight: boolean;
+  medicine: boolean;
+  perception: boolean;
+  survival: boolean;
+  deception: boolean;
+  intimidation: boolean;
+  performance: boolean;
+  persuasion: boolean;
+}
+
+interface Props {
+  abilityScores: AbilityScores;
+  savingThrowProficiencies: SavingThrowProficiencies;
+  skillProficiencies: SkillProficiencies;
+  proficiencyBonus: number;
+}
+
+// Define ability data with proper naming and grouping
+const ABILITIES = {
+  // Strength-based abilities
+  strength: [{ key: "athletics", name: "Athletics" }],
+
+  // Dexterity-based abilities
+  dexterity: [
+    { key: "acrobatics", name: "Acrobatics" },
+    { key: "sleightOfHand", name: "Sleight of Hand" },
+    { key: "stealth", name: "Stealth" },
+  ],
+
+  // Constitution-based abilities (empty array as there are no skills based on Constitution)
+  constitution: [],
+
+  // Intelligence-based abilities
+  intelligence: [
+    { key: "arcana", name: "Arcana" },
+    { key: "history", name: "History" },
+    { key: "investigation", name: "Investigation" },
+    { key: "nature", name: "Nature" },
+    { key: "religion", name: "Religion" },
+  ],
+
+  // Wisdom-based abilities
+  wisdom: [
+    { key: "animalHandling", name: "Animal Handling" },
+    { key: "insight", name: "Insight" },
+    { key: "medicine", name: "Medicine" },
+    { key: "perception", name: "Perception" },
+    { key: "survival", name: "Survival" },
+  ],
+
+  // Charisma-based abilities
+  charisma: [
+    { key: "deception", name: "Deception" },
+    { key: "intimidation", name: "Intimidation" },
+    { key: "performance", name: "Performance" },
+    { key: "persuasion", name: "Persuasion" },
+  ],
+};
+
+// Define ability score display information
+const ABILITY_GROUPS = {
+  strength: { name: "Strength", icon: "fitness_center" },
+  dexterity: { name: "Dexterity", icon: "sprint" },
+  constitution: { name: "Constitution", icon: "favorite" },
+  intelligence: { name: "Intelligence", icon: "cognition_2" },
+  wisdom: { name: "Wisdom", icon: "visibility" },
+  charisma: { name: "Charisma", icon: "record_voice_over" },
+};
+
+// Extract props
+const {
+  abilityScores,
+  savingThrowProficiencies,
+  skillProficiencies,
+  proficiencyBonus
+} = Astro.props;
+---
+
+<div class="bg-white p-4 sm:p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+  <h1
+    class="text-2xl sm:text-3xl font-bold mb-6 text-red-700 flex items-center gap-3"
+  >
+    <MaterialIcon icon="person_play" />
+    Character Abilities
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {
+      Object.entries(ABILITY_GROUPS).map(([abilityKey, group]) => {
+        const abilities = ABILITIES[abilityKey as keyof typeof ABILITIES] || [];
+        const abilityScore = abilityScores[abilityKey as keyof AbilityScores];
+        const abilityModifier = getAbilityModifier(abilityScore);
+
+        // Get saving throw proficiency status
+        const savingThrowProficient =
+          savingThrowProficiencies[
+            abilityKey as keyof SavingThrowProficiencies
+          ];
+
+        // Calculate saving throw modifier with proficiency if applicable
+        const savingThrowModifier = savingThrowProficient
+          ? abilityModifier + proficiencyBonus
+          : abilityModifier;
+
+        const savingThrowFormatted = formatModifier(savingThrowModifier);
+
+        return (
+          <div class="bg-gray-50 p-4 rounded-md shadow-sm">
+            <h2 class="text-xl font-semibold mb-3 text-red-700 flex items-center gap-2">
+              <MaterialIcon icon={group.icon} />
+              {group.name}
+            </h2>
+
+            <div class="flex flex-col gap-3">
+              {/* Saving Throw - Always display at the beginning */}
+              <div class="bg-white p-3 rounded border flex justify-between items-center gap-3 md:col-span-2 border-red-200">
+                <span class="font-medium flex items-center gap-2">
+                  <MaterialIcon
+                    icon={
+                      savingThrowProficient
+                        ? "radio_button_checked"
+                        : "radio_button_unchecked"
+                    }
+                    class="text-red-700"
+                  />
+                </span>
+                <span class="font-medium">{group.name} Save</span>
+                <span class="font-bold">{savingThrowFormatted}</span>
+              </div>
+
+              {/* Display abilities only if they exist for this ability score */}
+              {abilities.length > 0 &&
+                abilities.map((ability) => {
+                  // Check if this skill is proficient
+                  const skillProficient =
+                    skillProficiencies[ability.key as keyof SkillProficiencies];
+
+                  // Calculate skill modifier with proficiency if applicable
+                  const skillModifier = skillProficient
+                    ? abilityModifier + proficiencyBonus
+                    : abilityModifier;
+
+                  const skillFormatted = formatModifier(skillModifier);
+
+                  return (
+                    <div class="bg-white p-3 rounded border flex justify-between items-center">
+                      <span class="font-medium flex items-center gap-2">
+                        <MaterialIcon
+                          icon={
+                            skillProficient
+                              ? "radio_button_checked"
+                              : "radio_button_unchecked"
+                          }
+                          class="text-red-700"
+                        />
+                      </span>
+                      <span class="font-medium">{ability.name}</span>
+                      <span class="font-bold">{skillFormatted}</span>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

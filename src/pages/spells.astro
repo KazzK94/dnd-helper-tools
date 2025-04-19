@@ -1,14 +1,17 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
+import MainLayout from "../layouts/MainLayout.astro";
+import SpellList from "../components/spells/SpellList.astro";
+import MaterialIcon from "../components/icons/MaterialIcon.astro";
 ---
 
 <MainLayout title="Spells">
-  <div class="bg-white p-8 rounded-lg shadow-md">
-    <h1 class="text-4xl font-bold text-center text-red-700">D&D Spells</h1>
-    <p class="text-center mt-4 text-gray-600">Browse and search for spells</p>
-    
-    <div class="mt-8">
-      <p class="text-center text-lg">Spell content will be added here</p>
-    </div>
+  <div class="mb-6 px-2.5 pt-6">
+    <h1
+      class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-2"
+    >
+      <MaterialIcon icon="auto_fix_high" class="text-3xl" />
+      Spells
+    </h1>
   </div>
+  <SpellList />
 </MainLayout>

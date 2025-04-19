@@ -1,0 +1,71 @@
+---
+/**
+ * SpellList component
+ *
+ * Displays a list of warlock spells with their details
+ */
+import MaterialIcon from "../icons/MaterialIcon.astro";
+import { WARLOCK_SPELLS, getSpellsByLevel } from "../../data/warlockSpells";
+
+// Group spells by level for better organization
+const spellsByLevel = getSpellsByLevel(WARLOCK_SPELLS);
+
+// Order the levels
+const orderedLevels = Object.keys(spellsByLevel)
+  .map(Number)
+  .sort((a, b) => a - b);
+---
+
+<div class="flex flex-col gap-6">
+  {
+    orderedLevels.map((level) => (
+      <div class="spell-level-group bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+        <div class="bg-red-700 text-white px-4 py-2 flex items-center gap-2">
+          <MaterialIcon icon={level === 0 ? "tips_and_updates" : "stars"} />
+          <h2 class="font-semibold text-lg">
+            {level === 0 ? "Cantrips" : `Level ${level} Spells`}
+          </h2>
+        </div>
+
+        <div class="px-2.5 py-3 sm:p-6">
+          <div class="grid grid-cols-1 gap-4">
+            {spellsByLevel[level].map((spell) => (
+              <div class="bg-gray-50 p-4 rounded-md shadow-sm border border-gray-200 hover:border-red-200 transition-colors">
+                <div class="flex justify-between items-start mb-3">
+                  <h3 class="text-lg font-bold text-red-800">{spell.name}</h3>
+                  <span class="text-sm font-medium bg-red-100 text-red-800 py-0.5 px-2 rounded">
+                    {spell.school}
+                  </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm mb-3">
+                  <div class="flex items-center gap-1">
+                    <MaterialIcon icon="timer" class="text-gray-500" />
+                    {spell.castingTime}
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <MaterialIcon
+                      icon="social_distance"
+                      class="text-gray-500"
+                    />
+                    {spell.range}
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <MaterialIcon icon="category" class="text-gray-500" />
+                    {spell.components}
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <MaterialIcon icon="hourglass_top" class="text-gray-500" />
+                    {spell.duration}
+                  </div>
+                </div>
+
+                <p class="text-gray-700">{spell.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>
