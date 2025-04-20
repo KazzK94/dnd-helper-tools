@@ -1,0 +1,29 @@
+---
+import type { Trait } from '../../../types/character.types';
+
+interface Props {
+  trait: Trait;
+  showLevel?: boolean;
+}
+
+const { trait, showLevel = false } = Astro.props;
+---
+
+<div class="trait-card">
+  <div class="flex justify-between items-start">
+    <div class="flex-1">
+      <h4 class="text-lg font-medium text-gray-900">{trait.name}</h4>
+      <p class="text-sm text-gray-600">{trait.source}</p>
+    </div>
+    
+    {showLevel && trait.level !== undefined && (
+      <span class="px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+        Level {trait.level}
+      </span>
+    )}
+  </div>
+  
+  <div class="mt-2">
+    <p class="text-gray-700">{trait.description}</p>
+  </div>
+</div>

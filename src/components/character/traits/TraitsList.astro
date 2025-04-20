@@ -1,0 +1,25 @@
+---
+import type { Trait } from '../../../types/character.types';
+import TraitCard from './TraitCard.astro';
+
+interface Props {
+  traits: Trait[];
+  showLevel?: boolean;
+}
+
+const { traits, showLevel = false } = Astro.props;
+---
+
+<div class="traits-list space-y-4">
+  {traits.length > 0 ? (
+    <ul class="divide-y divide-gray-200">
+      {traits.map((trait) => (
+        <li class="py-3 px-4">
+          <TraitCard trait={trait} showLevel={showLevel} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="text-gray-500 italic">No traits to display</p>
+  )}
+</div>

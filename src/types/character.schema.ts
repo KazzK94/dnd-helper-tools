@@ -21,6 +21,14 @@ export const InventoryItemSchema = z.object({
   quantity: z.number().int().positive(),
 });
 
+// Trait item with validation
+export const TraitSchema = z.object({
+  name: z.string().min(1, "Trait name is required"),
+  description: z.string().min(1, "Trait description is required"),
+  source: z.string().min(1, "Trait source is required"),
+  level: z.number().int().nonnegative().optional(), // For class features that unlock at certain levels
+});
+
 // Ability scores with validation
 export const AbilityScoresSchema = z.object({
   strength: z.number().int().min(1).max(30),
@@ -78,6 +86,13 @@ export const InventorySchema = z.object({
   coins: CoinsSchema,
 });
 
+// Traits categorized
+export const TraitsSchema = z.object({
+  classFeatures: z.array(TraitSchema),
+  speciesTraits: z.array(TraitSchema),
+  feats: z.array(TraitSchema),
+});
+
 // Complete character schema
 export const CharacterSchema = z.object({
   // Basic details
@@ -106,6 +121,9 @@ export const CharacterSchema = z.object({
   
   // Inventory
   inventory: InventorySchema,
+  
+  // Traits
+  traits: TraitsSchema,
 });
 
 // =========== TypeScript Types Inferred from Zod ===========
@@ -113,10 +131,12 @@ export const CharacterSchema = z.object({
 // Types inferred from schemas for TypeScript usage
 export type Coins = z.infer<typeof CoinsSchema>;
 export type InventoryItem = z.infer<typeof InventoryItemSchema>;
+export type Trait = z.infer<typeof TraitSchema>;
 export type AbilityScores = z.infer<typeof AbilityScoresSchema>;
 export type SavingThrowProficiencies = z.infer<typeof SavingThrowProficienciesSchema>;
 export type SkillProficiencies = z.infer<typeof SkillProficienciesSchema>;
 export type Inventory = z.infer<typeof InventorySchema>;
+export type Traits = z.infer<typeof TraitsSchema>;
 export type CharacterData = z.infer<typeof CharacterSchema>;
 
 // Mapping of abilities to their associated skills

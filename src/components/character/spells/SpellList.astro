@@ -4,8 +4,8 @@
  *
  * Displays a list of warlock spells with their details
  */
-import MaterialIcon from "../icons/MaterialIcon.astro";
-import { WARLOCK_SPELLS, getSpellsByLevel } from "../../data/warlockSpells";
+import MaterialIcon from "../../icons/MaterialIcon.astro";
+import { WARLOCK_SPELLS, getSpellsByLevel } from "../../../data/warlockSpells";
 
 // Group spells by level for better organization
 const spellsByLevel = getSpellsByLevel(WARLOCK_SPELLS);
