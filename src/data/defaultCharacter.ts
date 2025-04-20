@@ -4,7 +4,7 @@ import type { CharacterData } from '../types/character.types'
  * Default character data for demos and new users
  */
 export const DEFAULT_CHARACTER: CharacterData = {
-	characterName: "Avarak Lightweaver",
+	name: "Avarak Lightweaver",
 	species: "Changeling",
 	background: "Merchant",
 	characterClass: "Warlock",

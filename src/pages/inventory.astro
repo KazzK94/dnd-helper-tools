@@ -6,14 +6,16 @@ import MaterialIcon from "../components/icons/MaterialIcon.astro";
 ---
 
 <MainLayout title="Inventory | D&D Helper Tools">
-  <div class="mb-6 px-2.5 pt-6">
-    <h1 class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-2">
-      <MaterialIcon icon="inventory_2" class="text-3xl" />
-      Inventory
-    </h1>
-  </div>
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-6 px-2.5 pt-6">
+      <h1
+        class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-2"
+      >
+        <MaterialIcon icon="inventory_2" class="text-3xl" />
+        Inventory
+      </h1>
+    </div>
 
-  <div class="max-w-3xl mx-auto">
     <InventorySection
       items={DEFAULT_CHARACTER.inventory.items}
       coins={DEFAULT_CHARACTER.inventory.coins}

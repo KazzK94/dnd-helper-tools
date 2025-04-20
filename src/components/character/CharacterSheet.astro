@@ -1,10 +1,11 @@
 ---
 // Import CharacterData interface from service
 import {
-  type CharacterData,
   DEFAULT_CHARACTER,
   getAbilityModifier,
 } from "../../services/characterService";
+
+import type { CharacterData } from "../../types/character.schema";
 
 interface Props {
   character?: CharacterData;
@@ -44,7 +45,7 @@ import MaterialIcon from "../icons/MaterialIcon.astro";
     <!-- Left Column: Character Details -->
     <div class="space-y-4">
       <BasicDetailsCard
-        characterName={character.characterName}
+        name={character.name}
         species={character.species}
         background={character.background}
         characterClass={character.characterClass}

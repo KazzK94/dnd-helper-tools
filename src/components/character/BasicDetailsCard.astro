@@ -1,6 +1,6 @@
 ---
 interface Props {
-  characterName?: string;
+  name?: string;  // Changed from characterName to name
   species?: string;
   background?: string;
   characterClass?: string;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const {
-  characterName = "Avarak Lightweaver",
+  name = "Avarak Lightweaver",  // Changed from characterName to name
   species = "Changeling",
   background = "Merchant",
   characterClass = "Warlock",
@@ -26,29 +26,29 @@ import MaterialIcon from "../icons/MaterialIcon.astro";
     Basic Details
   </h2>
 
-  <div class="space-y-3.5">
+  <div class="space-y-2.5">
     <div>
-      <p class="text-sm text-gray-500">Character Name</p>
-      <p class="text-lg font-medium">{characterName}</p>
+      <p class="text-sm text-gray-500 mb-0.5">Character Name</p>
+      <p class="text-lg font-medium">{name}</p>  <!-- Changed from characterName to name -->
     </div>
 
     <div>
-      <p class="text-sm text-gray-500">Class</p>
+      <p class="text-sm text-gray-500 mb-0.5">Class</p>
       <p class="text-lg font-medium">{characterClass} (Lv. {level})</p>
     </div>
 
     <div>
-      <p class="text-sm text-gray-500">Subclass</p>
+      <p class="text-sm text-gray-500 mb-0.5">Subclass</p>
       <p class="text-lg font-medium">{subclass}</p>
     </div>
 
     <div>
-      <p class="text-sm text-gray-500">Species</p>
+      <p class="text-sm text-gray-500 mb-0.5">Species</p>
       <p class="text-lg font-medium">{species}</p>
     </div>
 
     <div>
-      <p class="text-sm text-gray-500">Background</p>
+      <p class="text-sm text-gray-500 mb-0.5">Background</p>
       <p class="text-lg font-medium">{background}</p>
     </div>
   </div>
