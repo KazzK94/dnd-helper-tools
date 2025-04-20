@@ -3,7 +3,7 @@ import {
 	getAbilityModifier,
 	formatModifier,
 	getProficiencyBonus,
-} from '../../services/characterService'
+} from '../services/characterService'
 
 describe('characterService', () => {
 

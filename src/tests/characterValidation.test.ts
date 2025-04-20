@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import { validateCharacter } from '../../services/characterService';
-import { DEFAULT_CHARACTER } from '../../data/defaultCharacter';
+import { validateCharacter } from '../services/characterService';
+import { DEFAULT_CHARACTER } from '../data/defaultCharacter';
 
 describe('Character Validation', () => {
   test('should validate a correct character', () => {
