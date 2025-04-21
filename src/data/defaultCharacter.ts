@@ -57,7 +57,7 @@ export const DEFAULT_CHARACTER: CharacterData = {
 	currentHP: 38,
 	tempHP: 22,
 	maxHP: 38,
-	armorClass: 14,
+	armorClass: 12,
 	speed: 30,
 	hitDice: "5d8",
 
