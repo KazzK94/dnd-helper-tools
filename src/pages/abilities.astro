@@ -1,7 +1,11 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import AbilitiesSection from "../components/character/AbilitiesSection.astro";
-import { getProficiencyBonus, loadCharacter } from "../services/characterService";
+import AbilitiesSection from "../components/character/abilities/AbilitiesSection.astro";
+import {
+  getProficiencyBonus,
+  loadCharacter,
+} from "../services/characterService";
+import MaterialIcon from "../components/ui/MaterialIcon.astro";
 
 // Load character data
 const characterData = loadCharacter();
@@ -9,10 +13,19 @@ const proficiencyBonus = getProficiencyBonus(characterData.level);
 ---
 
 <MainLayout title="Abilities">
-  <AbilitiesSection 
-    abilityScores={characterData.abilityScores}
-    savingThrowProficiencies={characterData.savingThrowProficiencies}
-    skillProficiencies={characterData.skillProficiencies}
-    proficiencyBonus={proficiencyBonus}
-  />
+  <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+    <h1
+      class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-3 mb-6"
+    >
+      <MaterialIcon icon="person_play" class="!text-3xl sm:!text-4xl" />
+      Character Abilities
+    </h1>
+
+    <AbilitiesSection
+      abilityScores={characterData.abilityScores}
+      savingThrowProficiencies={characterData.savingThrowProficiencies}
+      skillProficiencies={characterData.skillProficiencies}
+      proficiencyBonus={proficiencyBonus}
+    />
+  </div>
 </MainLayout>

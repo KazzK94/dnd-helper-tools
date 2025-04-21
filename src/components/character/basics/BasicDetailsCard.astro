@@ -17,16 +17,17 @@ const {
   level = 1,
 } = Astro.props;
 
-import MaterialIcon from "../icons/MaterialIcon.astro";
+import BlockCard from '../../ui/BlockCard.astro'
+import MaterialIcon from "../../ui/MaterialIcon.astro";
 ---
 
-<div class="bg-gray-50 p-4 rounded-md shadow-sm">
-  <h2 class="text-lg font-semibold mb-3 text-red-700 flex items-center gap-2">
+<BlockCard>
+  <Fragment slot="title">
     <MaterialIcon icon="badge" />
     Basic Details
-  </h2>
+  </Fragment>
 
-  <div class="space-y-2.5">
+  <div slot="content" class="space-y-2.5 px-4 py-3">
     <div>
       <p class="text-sm text-gray-500 mb-0.5">Character Name</p>
       <p class="text-lg font-medium">{name}</p>
@@ -52,4 +53,4 @@ import MaterialIcon from "../icons/MaterialIcon.astro";
       <p class="text-lg font-medium">{background}</p>
     </div>
   </div>
-</div>
+</BlockCard>

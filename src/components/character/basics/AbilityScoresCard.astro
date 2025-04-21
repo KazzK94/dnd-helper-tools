@@ -1,12 +1,13 @@
 ---
-import MaterialIcon from "../icons/MaterialIcon.astro";
 import AbilityScoreCard from "./AbilityScoreCard.astro";
+import MaterialIcon from "../../ui/MaterialIcon.astro";
+import BlockCard from '../../ui/BlockCard.astro'
 
 /**
  * AbilityScoresSection component
- * 
+ *
  * Displays a grid of ability scores with their modifiers
- * 
+ *
  * Usage:
  * <AbilityScoresSection abilityScores={{ strength: 10, dexterity: 12, ... }} />
  */
@@ -30,7 +31,10 @@ interface Props {
 }
 
 // Mapping of ability scores with their display information
-const ABILITY_SCORE_DATA: Record<keyof Props['abilityScores'], AbilityScoreData> = {
+const ABILITY_SCORE_DATA: Record<
+  keyof Props["abilityScores"],
+  AbilityScoreData
+> = {
   strength: { name: "Strength", abbr: "STR" },
   dexterity: { name: "Dexterity", abbr: "DEX" },
   constitution: { name: "Constitution", abbr: "CON" },
@@ -42,19 +46,21 @@ const ABILITY_SCORE_DATA: Record<keyof Props['abilityScores'], AbilityScoreData>
 const { abilityScores } = Astro.props;
 ---
 
-<div class="bg-gray-50 p-4 rounded-md shadow-sm">
-  <h2 class="text-lg font-semibold mb-3 text-red-700 flex items-center gap-2">
+<BlockCard>
+  <Fragment slot="title">
     <MaterialIcon icon="person_play" />
     Ability Scores
-  </h2>
+  </Fragment>
 
-  <div class="grid grid-cols-3 gap-4">
-    {Object.entries(ABILITY_SCORE_DATA).map(([key, data]) => (
-      <AbilityScoreCard
-        name={data.name}
-        abbr={data.abbr}
-        score={abilityScores[key as keyof typeof abilityScores]}
-      />
-    ))}
+  <div slot="content" class="grid grid-cols-3 gap-4 px-4 py-3">
+    {
+      Object.entries(ABILITY_SCORE_DATA).map(([key, data]) => (
+        <AbilityScoreCard
+          name={data.name}
+          abbr={data.abbr}
+          score={abilityScores[key as keyof typeof abilityScores]}
+        />
+      ))
+    }
   </div>
-</div>
+</BlockCard>

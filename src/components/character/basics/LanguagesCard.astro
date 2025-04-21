@@ -1,0 +1,20 @@
+---
+interface Props {
+  languages?: string[];
+}
+
+const { languages = [] } = Astro.props;
+
+import BlockCard from "../../ui/BlockCard.astro";
+import MaterialIcon from "../../ui/MaterialIcon.astro";
+---
+
+<BlockCard>
+  <Fragment slot="title">
+    <MaterialIcon icon="translate" />
+    Languages
+  </Fragment>
+  <p slot="content" class="text-gray-800 px-4 py-3">
+    {languages.join(", ")}
+  </p>
+</BlockCard>

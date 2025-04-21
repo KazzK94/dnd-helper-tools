@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import { DEFAULT_CHARACTER } from "../data/defaultCharacter";
 import InventorySection from "../components/character/inventory/InventorySection.astro";
-import MaterialIcon from "../components/icons/MaterialIcon.astro";
+import MaterialIcon from "../components/ui/MaterialIcon.astro";
 ---
 
 <MainLayout title="Inventory | D&D Helper Tools">
@@ -11,7 +11,7 @@ import MaterialIcon from "../components/icons/MaterialIcon.astro";
       <h1
         class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-2"
       >
-        <MaterialIcon icon="inventory_2" class="text-3xl" />
+        <MaterialIcon icon="inventory_2" class="!text-3xl sm:!text-4xl" />
         Inventory
       </h1>
     </div>

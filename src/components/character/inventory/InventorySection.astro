@@ -1,8 +1,9 @@
 ---
 import type { InventoryItem, Coins } from "../../../types/character.types";
-import MaterialIcon from "../../icons/MaterialIcon.astro";
+import MaterialIcon from "../../ui/MaterialIcon.astro";
 import ItemsList from "./ItemsList.astro";
 import CoinsDisplay from "./CoinsDisplay.astro";
+import BlockCard from "../../ui/BlockCard.astro";
 
 interface Props {
   items: InventoryItem[];
@@ -12,23 +13,23 @@ interface Props {
 const { items, coins } = Astro.props;
 ---
 
-<div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-  <div class="bg-red-700 text-white px-4 py-2 flex items-center gap-2">
-    <MaterialIcon icon="inventory_2" />
-    <h3 class="font-semibold text-lg">Inventory</h3>
-  </div>
-  
-  <div class="py-4 px-3">
-    <div class="mb-4">
-      <CoinsDisplay coins={coins} />
-    </div>
-    
-    <div>
-      <div class="flex justify-between items-center mb-2">
-        <h4 class="text-xl font-medium text-gray-700 ml-1">Items</h4>
-      </div>
-      
-      <ItemsList items={items} />
-    </div>
-  </div>
-</div>
+<BlockCard class="mb-4">
+  <Fragment slot="title">
+    <MaterialIcon icon="toll" />
+    <span>Currency</span>
+  </Fragment>
+  <Fragment slot="content">
+    <CoinsDisplay coins={coins} />
+  </Fragment>
+</BlockCard>
+
+
+<BlockCard>
+	<Fragment slot="title">
+		<MaterialIcon icon="cases" />
+		<span>Items</span>
+	  </Fragment>
+	  <Fragment slot="content">
+		<ItemsList items={items} />
+	  </Fragment>
+</BlockCard>

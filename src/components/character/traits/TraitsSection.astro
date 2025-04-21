@@ -1,5 +1,6 @@
 ---
 import type { Traits } from "../../../types/character.types";
+import BlockCard from "../../ui/BlockCard.astro";
 import TraitsList from "./TraitsList.astro";
 
 interface Props {
@@ -12,35 +13,26 @@ const { classFeatures, speciesTraits, feats } = traits;
 
 <div class="space-y-8">
   <!-- Class Features -->
-  <div
-    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"
-  >
-    <h3 class="text-lg font-semibold bg-red-700 text-white px-4 py-2">
-      Class Features
-    </h3>
-    <TraitsList traits={classFeatures} showLevel={true} />
-  </div>
+  <BlockCard>
+    <Fragment slot="title">Class Features</Fragment>
+    <Fragment slot="content">
+      <TraitsList traits={classFeatures} showLevel={true} />
+    </Fragment>
+  </BlockCard>
 
-  <!-- Species Traits -->
-  {
-    /*
-	// TODO: Uncomment this when this info is revealed in the game
-	   <div
-	   class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"
-	   >
-    <h3 class="text-lg font-semibold bg-red-700 text-white px-4 py-2">
-      Species Traits
-    </h3>
-    <TraitsList traits={speciesTraits} />
-  </div>
-	*/
-  }
+  <!-- Species Traits (TODO: Remove 'hidden' class when info is revealed) -->
+  <BlockCard class="hidden">
+    <Fragment slot="title">Species Traits</Fragment>
+    <Fragment slot="content">
+      <TraitsList traits={speciesTraits} />
+    </Fragment>
+  </BlockCard>
 
   <!-- Feats -->
-  <div
-    class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200"
-  >
-    <h3 class="text-lg font-semibold bg-red-700 text-white px-4 py-2">Feats</h3>
-    <TraitsList traits={feats} />
-  </div>
+  <BlockCard>
+    <Fragment slot="title">Feats</Fragment>
+    <Fragment slot="content">
+      <TraitsList traits={feats} />
+    </Fragment>
+  </BlockCard>
 </div>

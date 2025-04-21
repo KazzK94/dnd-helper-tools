@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import TraitsSection from "../components/character/traits/TraitsSection.astro";
 import { DEFAULT_CHARACTER } from "../data/defaultCharacter";
-import MaterialIcon from "../components/icons/MaterialIcon.astro";
+import MaterialIcon from "../components/ui/MaterialIcon.astro";
 ---
 
 <MainLayout title="Character Traits | D&D Helper">
@@ -10,7 +10,7 @@ import MaterialIcon from "../components/icons/MaterialIcon.astro";
     <h1
       class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-2 mb-6"
     >
-      <MaterialIcon icon="psychology" />
+      <MaterialIcon icon="psychology" class="!text-3xl sm:!text-4xl" />
       Character Traits
     </h1>
 

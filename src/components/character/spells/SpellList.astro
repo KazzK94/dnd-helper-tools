@@ -4,8 +4,9 @@
  *
  * Displays a list of warlock spells with their details
  */
-import MaterialIcon from "../../icons/MaterialIcon.astro";
+import MaterialIcon from "../../ui/MaterialIcon.astro";
 import { WARLOCK_SPELLS, getSpellsByLevel } from "../../../data/warlockSpells";
+import BlockCard from "../../ui/BlockCard.astro";
 
 // Group spells by level for better organization
 const spellsByLevel = getSpellsByLevel(WARLOCK_SPELLS);
@@ -19,60 +20,53 @@ const orderedLevels = Object.keys(spellsByLevel)
 <div class="flex flex-col gap-6 max-w-4xl mx-auto">
   {
     orderedLevels.map((level) => (
-      <div class="spell-level-group bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
-        <div class="bg-red-700 text-white px-4 py-2 flex items-center gap-2">
+      <BlockCard>
+        <Fragment slot="title">
           <MaterialIcon icon={level === 0 ? "tips_and_updates" : "stars"} />
-          <h2 class="font-semibold text-lg">
-            {level === 0 ? "Cantrips" : `Level ${level} Spells`}
-          </h2>
-        </div>
+          {level === 0 ? "Cantrips" : `Level ${level} Spells`}
+        </Fragment>
 
-        <div class="px-2.5 py-3 sm:p-6">
-          <div class="grid grid-cols-1 gap-4">
-            {spellsByLevel[level].map((spell) => (
-              <div class="bg-gray-50 p-4 rounded-md shadow-sm border border-gray-200 hover:border-red-200 transition-colors">
-                <div class="flex justify-between items-start mb-4 flex-wrap gap-1.5">
-                  <h3 class="text-lg font-bold text-red-800">{spell.name}</h3>
-                  <div class="flex gap-2">
-                    {spell.source && (
-                      <span class="text-sm font-medium bg-purple-100 text-purple-800 py-0.5 px-2 rounded">
-                        {spell.source}
-                      </span>
-                    )}
-                    <span class="text-sm font-medium bg-red-100 text-red-800 py-0.5 px-2 rounded">
-                      {spell.school}
+        <div slot="content" class="flex flex-col gap-4 px-2.5 py-3 sm:p-6">
+          {spellsByLevel[level].map((spell) => (
+            <div class="bg-gray-50 p-4 rounded-md shadow-sm border border-gray-200 hover:border-red-200 transition-colors">
+              <div class="flex justify-between items-start mb-4 flex-wrap gap-1.5">
+                <h3 class="text-lg font-bold text-red-800">{spell.name}</h3>
+                <div class="flex gap-2">
+                  {spell.source && (
+                    <span class="text-sm font-medium bg-purple-100 text-purple-800 py-0.5 px-2 rounded">
+                      {spell.source}
                     </span>
-                  </div>
+                  )}
+                  <span class="text-sm font-medium bg-red-100 text-red-800 py-0.5 px-2 rounded">
+                    {spell.school}
+                  </span>
                 </div>
-
-                <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm mb-3">
-                  <div class="flex items-center gap-1">
-                    <MaterialIcon icon="timer" class="text-gray-500" />
-                    {spell.castingTime}
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <MaterialIcon
-                      icon="social_distance"
-                      class="text-gray-500"
-                    />
-                    {spell.range}
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <MaterialIcon icon="category" class="text-gray-500" />
-                    {spell.components}
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <MaterialIcon icon="hourglass_top" class="text-gray-500" />
-                    {spell.duration}
-                  </div>
-                </div>
-
-                <p class="text-gray-700 mt-4">{spell.description}</p>
               </div>
-            ))}
-          </div>
+
+              <div class="grid grid-cols-2 gap-x-4 gap-y-3 text-sm mb-3">
+                <div class="flex items-center gap-1">
+                  <MaterialIcon icon="timer" class="text-gray-500" />
+                  {spell.castingTime}
+                </div>
+                <div class="flex items-center gap-1">
+                  <MaterialIcon icon="social_distance" class="text-gray-500" />
+                  {spell.range}
+                </div>
+                <div class="flex items-center gap-1">
+                  <MaterialIcon icon="category" class="text-gray-500" />
+                  {spell.components}
+                </div>
+                <div class="flex items-center gap-1">
+                  <MaterialIcon icon="hourglass_top" class="text-gray-500" />
+                  {spell.duration}
+                </div>
+              </div>
+
+              <p class="text-gray-700 mt-4">{spell.description}</p>
+            </div>
+          ))}
         </div>
-      </div>
+      </BlockCard>
     ))
   }
 </div>
