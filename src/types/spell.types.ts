@@ -10,4 +10,5 @@ export interface Spell {
   components: string;
   duration: string;
   description: string;
+  source?: string;
 }

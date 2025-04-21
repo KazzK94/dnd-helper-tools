@@ -1,6 +1,6 @@
 ---
 interface Props {
-  name?: string;  // Changed from characterName to name
+  name?: string;
   species?: string;
   background?: string;
   characterClass?: string;
@@ -9,12 +9,12 @@ interface Props {
 }
 
 const {
-  name = "Avarak Lightweaver",  // Changed from characterName to name
-  species = "Changeling",
-  background = "Merchant",
-  characterClass = "Warlock",
-  subclass = "Fiendish Patron",
-  level = 5,
+  name = "",
+  species = "",
+  background = "",
+  characterClass = "",
+  subclass = "",
+  level = 1,
 } = Astro.props;
 
 import MaterialIcon from "../icons/MaterialIcon.astro";
@@ -29,7 +29,7 @@ import MaterialIcon from "../icons/MaterialIcon.astro";
   <div class="space-y-2.5">
     <div>
       <p class="text-sm text-gray-500 mb-0.5">Character Name</p>
-      <p class="text-lg font-medium">{name}</p>  <!-- Changed from characterName to name -->
+      <p class="text-lg font-medium">{name}</p>
     </div>
 
     <div>

@@ -1,0 +1,135 @@
+---
+/**
+ * SpellcastingInfo component
+ *
+ * Displays a character's spellcasting information including:
+ * - Spellcasting ability and modifier
+ * - Spell save DC
+ * - Spell attack bonus
+ * - Available spell slots
+ */
+import { type CharacterData } from "../../../types/character.schema";
+import {
+  getAbilityModifier,
+  formatModifier,
+  getProficiencyBonus,
+} from "../../../services/characterService";
+import MaterialIcon from "../../icons/MaterialIcon.astro";
+
+interface Props {
+  character: CharacterData;
+}
+
+const { character } = Astro.props;
+
+// Default to charisma if no ability is specified
+const spellcastingAbility = character.spellcastingAbility || "charisma";
+
+// Get ability score value
+const abilityScore = character.abilityScores[spellcastingAbility];
+const abilityModifier = getAbilityModifier(abilityScore);
+const formattedModifier = formatModifier(abilityModifier);
+
+// Calculate proficiency bonus
+const proficiency = getProficiencyBonus(character.level);
+
+// Calculate spell save DC: 8 + ability modifier + proficiency bonus
+const spellSaveDC = 8 + abilityModifier + proficiency;
+
+// Calculate spell attack bonus: ability modifier + proficiency bonus
+const spellAttackBonus = abilityModifier + proficiency;
+const formattedAttackBonus = formatModifier(spellAttackBonus);
+
+// Determine available spell slots based on class and level
+// For Warlock, they have a different spell slot progression
+const isWarlock = character.characterClass.toLowerCase() === "warlock";
+let spellSlots = 0;
+let spellLevel = 0;
+
+if (isWarlock) {
+  if (character.level >= 1) {
+    spellSlots = character.level === 1 ? 1 : 2;
+    spellLevel = 1;
+  }
+  if (character.level >= 3) {
+    spellLevel = 2;
+  }
+  if (character.level >= 5) {
+    spellSlots = character.level >= 11 && character.level <= 16 ? 3 : 2;
+    spellLevel = 3;
+  }
+  if (character.level >= 7) {
+    spellLevel = 4;
+  }
+  if (character.level >= 9) {
+    spellLevel = 5;
+  }
+  if (character.level >= 17) {
+    spellSlots = 4;
+  }
+}
+
+// Format ability name for display
+const abilityNames = {
+  strength: "Strength",
+  dexterity: "Dexterity",
+  constitution: "Constitution",
+  intelligence: "Intelligence",
+  wisdom: "Wisdom",
+  charisma: "Charisma",
+};
+
+const abilityName = abilityNames[spellcastingAbility];
+
+// Generate an array of spell slots for rendering
+const spellSlotArray = Array(spellSlots).fill(spellLevel);
+---
+
+<div
+  class="bg-gray-50 rounded-lg shadow-md overflow-hidden border border-gray-200 mb-6"
+>
+  <div class="bg-red-700 text-white px-4 py-2 flex items-center gap-2">
+    <MaterialIcon icon="brightness_high" />
+    <h3 class="font-semibold text-lg">Spellcasting Information</h3>
+  </div>
+
+  <div class="p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
+      <div class="lg:col-span-3 xl:col-span-1 bg-white p-4 rounded-md shadow-sm border border-gray-200">
+        <h4 class="text-sm text-gray-500 font-medium mb-1">Spellcasting Ability</h4>
+        <p class="text-lg font-semibold">{abilityName}</p>
+      </div>
+
+        <div class="bg-white p-4 rounded-md shadow-sm border border-gray-200">
+          <h4 class="text-sm text-gray-500 font-medium mb-1">Spell Save DC</h4>
+          <p class="text-xl font-bold">{spellSaveDC}</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-md shadow-sm border border-gray-200">
+          <h4 class="text-sm text-gray-500 font-medium mb-1">Spell Attack</h4>
+          <p class="text-xl font-bold">{formattedAttackBonus}</p>
+        </div>
+
+
+    {
+      isWarlock && (
+        <div class="bg-white p-4 rounded-md shadow-sm border border-gray-200">
+          <h4 class="text-sm text-gray-500 font-medium mb-1">Pact Magic Spell Slots</h4>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-4 mt-2 justify-start">
+              {spellSlotArray.map(() => (
+                <div class="ml-2 size-9 rounded-full flex items-center justify-center bg-blue-600/80 text-white border-2 border-blue-600/90 shadow-md">
+                  <div class="text-center">
+                    <div class="font-bold text-xs">Lv. {spellLevel}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )
+    }
+	    </div>
+  </div>
+</div>

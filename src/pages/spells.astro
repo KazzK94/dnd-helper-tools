@@ -1,7 +1,12 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import SpellList from "../components/character/spells/SpellList.astro";
+import SpellcastingInfo from "../components/character/spells/SpellcastingInfo.astro";
 import MaterialIcon from "../components/icons/MaterialIcon.astro";
+import { loadCharacter } from "../services/characterService";
+
+// Load character data
+const character = loadCharacter();
 ---
 
 <MainLayout title="Spells">
@@ -12,6 +17,11 @@ import MaterialIcon from "../components/icons/MaterialIcon.astro";
       <MaterialIcon icon="auto_fix_high" class="text-3xl" />
       Spells
     </h1>
+    
+    <!-- Spellcasting information section -->
+    <SpellcastingInfo character={character} />
+    
+    <!-- Spells list -->
     <SpellList />
   </div>
 </MainLayout>

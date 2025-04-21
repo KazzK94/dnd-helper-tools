@@ -10,7 +10,9 @@ export const DEFAULT_CHARACTER: CharacterData = {
 	characterClass: "Warlock",
 	subclass: "Fiendish Patron",
 	level: 5,
+	spellcastingAbility: "charisma",
 
+	languages: ["Common", "Infernal", "Dwarvish"],
 	backgroundText: "A changeling that has taken the form of a human woman, who has spent her life as a Merchant. Since the day she became The Collector, a misterious entity under the command of Asmodeus, she has been searching for the way to break the chains that bind her to the demon lord.",
 
 	abilityScores: {
@@ -58,7 +60,7 @@ export const DEFAULT_CHARACTER: CharacterData = {
 	armorClass: 14,
 	speed: 30,
 	hitDice: "5d8",
-	
+
 	inventory: {
 		items: [
 			{
@@ -78,7 +80,7 @@ export const DEFAULT_CHARACTER: CharacterData = {
 			},
 			{
 				name: "Leather Armor",
-				description: "Light armor made of leather",
+				description: "A simple armor made of leather. Grants AC = 11 + Dexterity modifier",
 				quantity: 1
 			},
 			{
@@ -93,7 +95,7 @@ export const DEFAULT_CHARACTER: CharacterData = {
 			},
 			{
 				name: "Ruby",
-				description: "A precious gemstone with a deep red color",
+				description: "A precious gemstone with a deep red color, delivered by a mysterious benefactor in the name of The Collector (probably meaning Asmodeus).",
 				quantity: 1
 			},
 			{
@@ -120,61 +122,63 @@ export const DEFAULT_CHARACTER: CharacterData = {
 			platinum: 0
 		}
 	},
-	
+
 	traits: {
 		classFeatures: [
 			{
-				name: "Pact Magic",
-				description: "Your arcane research and the magic bestowed on you by your patron have given you facility with spells. You know 2 cantrips and 6 spells from the warlock spell list.",
+				name: "Eldritch Invocations",
+				description: "You gain some Eldritch Invocations (5 EI's at level 5). You can change one of them every time you level up.",
 				source: "Warlock Class Feature",
 				level: 1
 			},
 			{
-				name: "Eldritch Invocations",
-				description: "In your study of occult lore, you have unearthed eldritch invocations, fragments of forbidden knowledge that imbue you with an abiding magical ability. You know 3 invocations: Agonizing Blast, Devil's Sight, and Mask of Many Faces.",
+				name: "EI - Agonizing Blast (Eldritch Blast)",
+				description: "When you cast Eldritch Blast, add your Charisma modifier to the damage it deals on a hit.",
+				source: "Eldritch Invocations",
+				level: 2
+			},
+			{
+				name: "EI - Pact of the Blade",
+				description: "Use your Bonus Action to create a pact weapon (simple or martial) in your hand and you're proficient with it. You can also create a bond with a magic weapon you touch. Use Charisma as modifier for attack and damage rolls. You can cause the weapon to deal Necrotic, Psychic, or Radiant damage instead of its normal damage type. You can't use this on more than one weapon at once. The weapon vanishes if it's more than 5ft away from you for a minute, or if you die.",
+				source: "Eldritch Invocations"
+			},
+			{
+				name: "EI - Thirsting Blade",
+				description: "You gain the Extra Attack feature for your pact weapon, allowing you to attack twice with the weapon when you take the Attack action on your turn.",
+				source: "Eldritch Invocations",
+				level: 5
+			},
+			{
+				name: "Pact Magic",
+				description: "You know some warlock cantrips and spells (3 cantrips and 6 spells at level 5). You regain all Pact Magic spell slots after a short or long rest. You can change one of your cantrips and one of your spells from this feature every time you level up.",
+				source: "Warlock Class Feature",
+				level: 1
+			},
+			{
+				name: "Magical Cunning",
+				description: "Once per day, you can perform an Esoteric Rite for 1 minute to regain up to half your maximum Pact Magic spell slots (rounded up).",
 				source: "Warlock Class Feature",
 				level: 2
 			},
 			{
-				name: "Pact Boon: Pact of the Tome",
-				description: "Your patron gives you a grimoire called a Book of Shadows. When you gain this feature, choose three cantrips from any class's spell list. The cantrips don't need to be from the same spell list. While the book is on your person, you can cast those cantrips at will.",
-				source: "Warlock Class Feature",
-				level: 3
-			},
-			{
 				name: "Dark One's Blessing",
-				description: "When you reduce a hostile creature to 0 hit points, you gain temporary hit points equal to your Charisma modifier + your warlock level.",
+				description: "When you reduce an enemy to 0 HP, or an enemy at 10ft or less from you drops to 0 HP, you gain Temporary HP equal to your Charisma modifier + your Warlock level.",
 				source: "Fiendish Patron Feature",
-				level: 1
+				level: 3
 			}
 		],
 		speciesTraits: [
 			{
 				name: "Shapechanger",
-				description: "As an action, you can change your appearance and your voice. You determine the specifics of the changes, including your coloration, hair length, and sex. You can also adjust your height and weight, but not so much that your size changes. You can make yourself appear as a member of another race, though none of your game statistics change.",
-				source: "Changeling Trait"
-			},
-			{
-				name: "Changeling Instincts",
-				description: "You gain proficiency with two of the following skills of your choice: Deception, Insight, Intimidation, and Persuasion.",
-				source: "Changeling Trait"
-			},
-			{
-				name: "Unsettling Visage",
-				description: "When a creature you can see makes an attack roll against you, you can use your reaction to impose disadvantage on the attack roll. This trait can be used once per short or long rest.",
-				source: "Changeling Trait"
+				description: "As an action, you can change your appearance and voice to one you've seen before. You determine the specifics such as coloration, hair length, sex, height, weight, size (medium or small) or race (needs to have the same arrangement of limbs). None of your game statistics change. Your clothing and equipment aren’t changed by this trait. You stay in the new form until you use an action to revert to your true form or until you die.",
+				source: "Changeling Species"
 			}
 		],
 		feats: [
 			{
-				name: "Actor",
-				description: "You gain +1 Charisma, advantage on Deception and Performance checks when trying to pass yourself off as a different person, and you can mimic the speech of a person or the sounds made by a creature that you have heard for at least 1 minute.",
-				source: "Feat"
-			},
-			{
-				name: "Eldritch Adept",
-				description: "You learn one Eldritch Invocation option of your choice from the warlock class. If the invocation has a prerequisite, you can choose that invocation only if you're a warlock and only if you meet the prerequisite.",
-				source: "Feat"
+				name: "Lucky",
+				description: "You have 3 luck points. When you make an attack roll, ability check, or saving throw, you can spend one luck point to roll with advantage. You can also spend one luck point on a target's d20 roll to give them disadvantage. You regain all luck points after a long rest.",
+				source: "Merchant Background"
 			}
 		]
 	}

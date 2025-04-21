@@ -21,6 +21,7 @@ import BackgroundCard from "./BackgroundCard.astro";
 import AbilityScoresSection from "./AbilityScoresSection.astro";
 import CombatStatsCard from "./CombatStatsCard.astro";
 import MaterialIcon from "../icons/MaterialIcon.astro";
+import LanguagesCard from './LanguagesCard.astro'
 ---
 
 <div class="flex justify-between items-center gap-3 mb-4">
@@ -51,6 +52,8 @@ import MaterialIcon from "../icons/MaterialIcon.astro";
       subclass={character.subclass}
       level={character.level}
     />
+
+	<LanguagesCard languages={character.languages} />
 
     <BackgroundCard backgroundText={character.backgroundText} />
   </div>

@@ -103,7 +103,8 @@ export const CharacterSchema = z.object({
   subclass: z.string(),
   level: z.number().int().min(1).max(20),
   
-  // Background text
+  // Language and Background 
+  languages: z.array(z.string()).min(1, "At least one language is required"),
   backgroundText: z.string(),
   
   // Game details
@@ -118,6 +119,9 @@ export const CharacterSchema = z.object({
   armorClass: z.number().int().positive(),
   speed: z.number().int().positive(),
   hitDice: z.string().regex(/^\d+d\d+$/, "Invalid dice format. Must be '1d8', '2d6', etc."),
+  
+  // Spellcasting
+  spellcastingAbility: z.enum(['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']).optional(),
   
   // Inventory
   inventory: InventorySchema,
