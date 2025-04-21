@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # vscode setting folder
 .vscode/
+
+# print files
+src/pages/print.astro
+src/layouts/PrintLayout.astro
