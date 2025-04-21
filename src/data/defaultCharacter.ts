@@ -4,8 +4,8 @@ import type { CharacterData } from '../types/character.types'
  * Default character data for demos and new users
  */
 export const DEFAULT_CHARACTER: CharacterData = {
-	name: "Avarak Lightweaver",
-	species: "Changeling",
+	name: "Ava",
+	species: "Human",
 	background: "Merchant",
 	characterClass: "Warlock",
 	subclass: "Fiendish Patron",
@@ -55,7 +55,7 @@ export const DEFAULT_CHARACTER: CharacterData = {
 	},
 
 	currentHP: 38,
-	tempHP: 17,
+	tempHP: 22,
 	maxHP: 38,
 	armorClass: 14,
 	speed: 30,
@@ -126,6 +126,18 @@ export const DEFAULT_CHARACTER: CharacterData = {
 	traits: {
 		classFeatures: [
 			{
+				name: "Pact Magic",
+				description: "You know some warlock cantrips and spells (3 cantrips and 6 spells at level 5). You regain all Pact Magic spell slots after a short or long rest. You can change one of your cantrips and one of your spells from this feature every time you level up.",
+				source: "Warlock Class Feature",
+				level: 1
+			},
+			{
+				name: "Magical Cunning",
+				description: "Once per day, you can perform an Esoteric Rite for 1 minute to regain up to half your maximum Pact Magic spell slots (rounded up).",
+				source: "Warlock Class Feature",
+				level: 2
+			},
+			{
 				name: "Eldritch Invocations",
 				description: "You gain some Eldritch Invocations (5 EI's at level 5). You can change one of them every time you level up.",
 				source: "Warlock Class Feature",
@@ -139,8 +151,9 @@ export const DEFAULT_CHARACTER: CharacterData = {
 			},
 			{
 				name: "EI - Pact of the Blade",
-				description: "Use your Bonus Action to create a pact weapon (simple or martial) in your hand and you're proficient with it. You can also create a bond with a magic weapon you touch. Use Charisma as modifier for attack and damage rolls. You can cause the weapon to deal Necrotic, Psychic, or Radiant damage instead of its normal damage type. You can't use this on more than one weapon at once. The weapon vanishes if it's more than 5ft away from you for a minute, or if you die.",
-				source: "Eldritch Invocations"
+				description: "[Preferred: Longsword (1d8 Slashing, Versatile: 1d10)] - Use your Bonus Action to create a pact weapon (simple or martial) in your hand and you're proficient with it. You can also create a bond with a magic weapon you touch. Use Charisma as modifier for attack and damage rolls. You can cause the weapon to deal Necrotic, Psychic, or Radiant damage instead of its normal damage type. You can't use this on more than one weapon at once. The weapon vanishes if it's more than 5ft away from you for a minute, or if you die.",
+				source: "Eldritch Invocations",
+				level: 2
 			},
 			{
 				name: "EI - Thirsting Blade",
@@ -149,15 +162,15 @@ export const DEFAULT_CHARACTER: CharacterData = {
 				level: 5
 			},
 			{
-				name: "Pact Magic",
-				description: "You know some warlock cantrips and spells (3 cantrips and 6 spells at level 5). You regain all Pact Magic spell slots after a short or long rest. You can change one of your cantrips and one of your spells from this feature every time you level up.",
-				source: "Warlock Class Feature",
-				level: 1
+				name: "EI - Eldritch Smite",
+				description: "[TOTAL: 4d8 Force] - Once per turn when you hit a creature with your pact weapon, you can expend a Pact Magic spell slot to deal an extra 1d8 Force damage to the target, plus another 1d8 per level of the spell slot, and you can give the target the Prone condition if it is Huge or smaller.",
+				source: "Eldritch Invocations",
+				level: 5
 			},
 			{
-				name: "Magical Cunning",
-				description: "Once per day, you can perform an Esoteric Rite for 1 minute to regain up to half your maximum Pact Magic spell slots (rounded up).",
-				source: "Warlock Class Feature",
+				name: "EI - Fiendish Vigor",
+				description: "You can cast False Life on yourself without expending a spell slot. When do this, you automatically get the highest number on the die rolls.",
+				source: "Eldritch Invocations",
 				level: 2
 			},
 			{

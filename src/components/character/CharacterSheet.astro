@@ -21,24 +21,16 @@ import BackgroundCard from "./BackgroundCard.astro";
 import AbilityScoresSection from "./AbilityScoresSection.astro";
 import CombatStatsCard from "./CombatStatsCard.astro";
 import MaterialIcon from "../icons/MaterialIcon.astro";
-import LanguagesCard from './LanguagesCard.astro'
+import LanguagesCard from "./LanguagesCard.astro";
 ---
 
 <div class="flex justify-between items-center gap-3 mb-4">
   <h1
-    class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-2"
+    class="text-2xl sm:text-3xl font-bold text-red-700 flex items-center gap-2 mb-3"
   >
     <MaterialIcon icon="person" class="text-2xl sm:text-3xl" />
     Character Sheet
   </h1>
-  <a
-    href="/update"
-    class="bg-red-700 text-white px-3 py-1 rounded-md hover:bg-red-800 flex items-center gap-1"
-    aria-label="Edit Character"
-  >
-    <MaterialIcon icon="edit" />
-    <span class="hidden sm:inline">Edit Character</span>
-  </a>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -53,9 +45,14 @@ import LanguagesCard from './LanguagesCard.astro'
       level={character.level}
     />
 
-	<LanguagesCard languages={character.languages} />
+    <LanguagesCard languages={character.languages} />
 
-    <BackgroundCard backgroundText={character.backgroundText} />
+    {
+      	/*
+		// TODO: Uncomment when Background is revealed
+		<BackgroundCard backgroundText={character.backgroundText} />
+		*/
+    }
   </div>
 
   <!-- Right Column: Stats -->
