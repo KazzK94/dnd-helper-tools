@@ -54,7 +54,7 @@ export const DEFAULT_CHARACTER: CharacterData = {
 		persuasion: true
 	},
 
-	currentHP: 38,
+	currentHP: 29,
 	tempHP: 22,
 	maxHP: 38,
 	armorClass: 12,
@@ -63,6 +63,16 @@ export const DEFAULT_CHARACTER: CharacterData = {
 
 	inventory: {
 		items: [
+			{
+				name: "Greater Potion of Healing",
+				description: "As a bonus action, you can drink this potion to recover 4d4 + 4 HP",
+				quantity: 1
+			},
+			{
+				name: "Empty Phial", 
+				description: "An empty phial to fill with a concoction",
+				quantity: 10
+			},
 			{
 				name: "Navigator's Tools",
 				description: "Tools for navigation and charting courses",
@@ -118,7 +128,7 @@ export const DEFAULT_CHARACTER: CharacterData = {
 			copper: 0,
 			silver: 0,
 			electrum: 0,
-			gold: 136,
+			gold: 66,
 			platinum: 0
 		}
 	},
@@ -192,6 +202,11 @@ export const DEFAULT_CHARACTER: CharacterData = {
 				name: "Lucky",
 				description: "You have 3 luck points. When you make an attack roll, ability check, or saving throw, you can spend one luck point to roll with advantage. You can also spend one luck point on a target's d20 roll to give them disadvantage. You regain all luck points after a long rest.",
 				source: "Merchant Background"
+			},
+			{
+				name: "Withered Blood",
+				description: "Your blood contains the poison from the thorns of a dying rose that you obtained in a gachapon. If a creature bites you, they will receive 1d4 Poison damage.",
+				source: "Withered Rose (Witch's Gachapon)"
 			}
 		]
 	}
